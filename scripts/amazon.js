@@ -30,7 +30,7 @@ products.forEach(product => {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class="quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -46,7 +46,7 @@ products.forEach(product => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -77,11 +77,29 @@ function updateCartQuantity(){
     // console.log(cart);
 }
 
+let timeoutId;
+
+function addedToCartConfirmation(productId){
+  const addedToCartMsg = document.querySelector(`.added-to-cart-${productId}`);
+    addedToCartMsg.classList.add('added');
+    clearInterval(timeoutId);
+    timeoutId = setTimeout(() => {
+      addedToCartMsg.classList.remove('added');
+    }, 2000);
+}
+
 document.querySelectorAll('.add-to-cart-button').forEach(button =>{
   button.addEventListener('click', () => {
     // console.log('Added');
-    const productId = button.dataset.productId;
-    addToCart(productId);
+    const {productId} = button.dataset;
+
+    const quantitySelector = document.querySelector(`.quantity-selector-${productId}`);
+    const quantity = Number(quantitySelector.value);
+    // console.log(quantity);
+
+    addedToCartConfirmation(productId);
+    addToCart(productId, quantity);
     updateCartQuantity();
+    quantitySelector.value = '1';
   });
 });
