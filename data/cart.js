@@ -43,7 +43,7 @@ export function addToCart(productId, quantity){
 
   }
 
-  export function removeFromCart(productId){
+export function removeFromCart(productId){
     
     // let newCart = [];
     // cart.forEach(cartItem => {
@@ -62,4 +62,15 @@ export function addToCart(productId, quantity){
 
     saveToStorage();
 
-  }
+}
+
+let timeoutId;
+
+export function addedToCartConfirmation(productId){
+  const addedToCartMsg = document.querySelector(`.added-to-cart-${productId}`);
+    addedToCartMsg.classList.add('added');
+    clearInterval(timeoutId);
+    timeoutId = setTimeout(() => {
+      addedToCartMsg.classList.remove('added');
+    }, 2000);
+}

@@ -656,5 +656,36 @@ export const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "1",
+    image: "images/products/backpack.jpg",
+    name: "Unisex Backpack 10L - Black",
+    rating: {
+      stars: 5,
+      count: 9265
+    },
+    priceCents: 1600,
+    keywords: [
+      "bag",
+      "backpack",
+      "essentials",
+      "accessories"
+    ]
+  },
+  {
+    id: "2",
+    image: "images/products/umbrella.jpg",
+    name: "Umbrella - Black",
+    rating: {
+      stars: 3,
+      count: 716
+    },
+    priceCents: 700,
+    keywords: [
+      "umbrella",
+      "rain",
+      "windy"
+    ]
   }
 ];
