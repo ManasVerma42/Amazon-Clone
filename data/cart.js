@@ -74,3 +74,12 @@ export function addedToCartConfirmation(productId){
       addedToCartMsg.classList.remove('added');
     }, 2000);
 }
+
+export let cartQuantity;
+export function calculateCartQuantity(){
+    cartQuantity = 0;
+    cart.forEach(cartItem => {
+      cartQuantity += cartItem.quantity;  
+    //   console.log(cartQuantity);
+    });
+}
