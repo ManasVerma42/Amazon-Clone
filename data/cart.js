@@ -83,3 +83,18 @@ export function calculateCartQuantity(){
     //   console.log(cartQuantity);
     });
 }
+
+export function updateQuantity(productId, newQuantity){
+    
+  let matchingItem;
+  
+  cart.forEach(cartItem => {
+    if(productId === cartItem.productId){
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.quantity = newQuantity;
+  // console.log(matchingItem.quantity);
+  saveToStorage();
+}
