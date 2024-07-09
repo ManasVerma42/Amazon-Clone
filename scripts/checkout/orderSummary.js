@@ -4,6 +4,7 @@ import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions,getDeliveryOption} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
+import {renderCheckoutHeader} from './checkoutHeader.js';
 
 export function renderOrderSummary(){    
     
@@ -22,8 +23,7 @@ export function renderOrderSummary(){
 
         const today = dayjs();
         const deliveryDate = today.add(
-            deliveryOption.deliveryDays,
-            'days'
+            deliveryOption.deliveryDays, 'days'
         );
         const dateString = deliveryDate.format(
             'dddd, MMMM D'
@@ -136,11 +136,13 @@ export function renderOrderSummary(){
             // console.log('delete');
             const {productId} = link.dataset;
             removeFromCart(productId);
-            updateCartQuantity();
+            // updateCartQuantity();
+            renderCheckoutHeader();
             // console.log(cart);
 
-            const container = document.querySelector(`.cart-item-container-${productId}`);
-            container.remove();
+            // const container = document.querySelector(`.cart-item-container-${productId}`);
+            // container.remove();
+            renderOrderSummary();
 
             renderPaymentSummary();
 
@@ -171,11 +173,11 @@ export function renderOrderSummary(){
 
     function saveQuantity(productId){
         const container = document.querySelector(`.cart-item-container-${productId}`);
-            container.classList.remove("is-editing-quantity");
+        container.classList.remove("is-editing-quantity");
 
-            const inputValue = document.querySelector(`.quantity-input-${productId}`);
-            const newQuantity = Number(inputValue.value);
-            // console.log(newQuantity);
+        const inputValue = document.querySelector(`.quantity-input-${productId}`);
+        const newQuantity = Number(inputValue.value);
+        // console.log(newQuantity);
 
         if (newQuantity >= 0) {
             
@@ -189,16 +191,19 @@ export function renderOrderSummary(){
         
             updateQuantity(productId, newQuantity);
             document.querySelector(`.quantity-label-${productId}`).innerHTML = `${matchingItem.quantity}`;
-            updateCartQuantity();
+            // updateCartQuantity();
+            renderCheckoutHeader();
+            renderPaymentSummary();
         } else {
             alert('Enter a valid Quantity');
         }
     }
-
+    
+    renderCheckoutHeader();
 }
 
-export function updateCartQuantity(){
-    const cartQuantity = calculateCartQuantity();
-    document.querySelector('.return-to-home-link').innerHTML = `${cartQuantity} items`;
-}
-updateCartQuantity();
+// export function updateCartQuantity(){
+//     const cartQuantity = calculateCartQuantity();
+//     document.querySelector('.return-to-home-link').innerHTML = `${cartQuantity} items`;
+// }
+// updateCartQuantity();

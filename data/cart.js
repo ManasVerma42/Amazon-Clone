@@ -97,7 +97,7 @@ export function calculateCartQuantity(){
     let cartQuantity = 0;
     cart.forEach(cartItem => {
       cartQuantity += cartItem.quantity;  
-    //   console.log(cartQuantity);
+      // console.log(cartQuantity);
     });
     return cartQuantity;
 }
