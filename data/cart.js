@@ -93,13 +93,13 @@ export function addedToCartConfirmation(productId){
     }, 2000);
 }
 
-export let cartQuantity;
 export function calculateCartQuantity(){
-    cartQuantity = 0;
+    let cartQuantity = 0;
     cart.forEach(cartItem => {
       cartQuantity += cartItem.quantity;  
     //   console.log(cartQuantity);
     });
+    return cartQuantity;
 }
 
 export function updateQuantity(productId, newQuantity){
