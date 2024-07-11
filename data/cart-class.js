@@ -1,12 +1,15 @@
-//usually the name of a function which creates objects is written in PascalCase
-function Cart(localStorageKey) {
-    
-    const cart = {
-    
-        cartItems: undefined,
+class Cart {
+
+        cartItems;
+        localStorageKey;
+
+        constructor(localStorageKey) {
+            this.localStorageKey = localStorageKey;
+            this.loadFromStorage();
+        }
     
         loadFromStorage() {
-            this.cartItems = JSON.parse(localStorage.getItem(localStorageKey));
+            this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
             // console.log(this.cartItems);
             if(!this.cartItems){
                 this.cartItems = [
@@ -22,11 +25,11 @@ function Cart(localStorageKey) {
                     }
                 ];
             }
-          },
+          }
     
         saveToStorage() {
-            localStorage.setItem(localStorageKey, JSON.stringify(this.cartItems));
-        },
+            localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        }
     
         addToCart(productId, quantity) {
     
@@ -50,7 +53,7 @@ function Cart(localStorageKey) {
         
             this.saveToStorage();
         
-          },
+          }
           
         removeFromCart(productId) {
         
@@ -66,18 +69,18 @@ function Cart(localStorageKey) {
         
             this.saveToStorage();
         
-        },
+        }
     
-        timeoutId: undefined,
+        timeoutId = undefined;
     
         addedToCartConfirmation(productId) {
         const addedToCartMsg = document.querySelector(`.added-to-cart-${productId}`);
             addedToCartMsg.classList.add('added');
             clearInterval(timeoutId);
-            timeoutId = setTimeout(() => {
+            this.timeoutId = setTimeout(() => {
             addedToCartMsg.classList.remove('added');
             }, 2000);
-        },
+        }
     
         calculateCartQuantity() {
             let cartQuantity = 0;
@@ -86,7 +89,7 @@ function Cart(localStorageKey) {
               // console.log(cartQuantity);
             });
             return cartQuantity;
-        },
+        }
     
         updateQuantity(productId, newQuantity) {
         
@@ -101,7 +104,7 @@ function Cart(localStorageKey) {
             matchingItem.quantity = newQuantity;
             // console.log(matchingItem.quantity);
             this.saveToStorage();
-          },
+          }
     
           updateDeliveryOption(productId, deliveryOptionId) {
       
@@ -118,20 +121,14 @@ function Cart(localStorageKey) {
             this.saveToStorage();
           
           }
-          
-    };
-
-    return cart;
 
 }
 
-const cart = Cart('cart-oop');
-const businessCart = Cart('businessCart-oop');
-
-cart.loadFromStorage();
-businessCart.loadFromStorage();
+const cart = new Cart('cart-oop');
+const businessCart = new Cart('businessCart-oop');
 
 // cart.addToCart('3ebe75dc-64d2-4137-8860-1f5a963e534b', 2);
 
 console.log(cart);
 console.log(businessCart);
+console.log(businessCart instanceof Cart);
