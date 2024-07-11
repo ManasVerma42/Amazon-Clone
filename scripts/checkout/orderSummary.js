@@ -39,7 +39,7 @@ export function renderOrderSummary(){
                 <div class="product-price">
                     $${formatCurrency(matchingProduct.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity product-quantity-${matchingProduct.id}">
                     <span>
                     Quantity: <span class="quantity-label quantity-label-${matchingProduct.id}">${cartItem.quantity}</span>
                     </span>
@@ -48,7 +48,9 @@ export function renderOrderSummary(){
                     </span>
                     <input class="quantity-input quantity-input-${matchingProduct.id}">
                     <span class="save-quantity-link link-primary" data-product-id="${matchingProduct.id}">Save</span>
-                    <span class="delete-quantity-link link-primary" data-product-id="${matchingProduct.id}">
+                    <span class="delete-quantity-link 
+                    delete-quantity-link-${matchingProduct.id}
+                    link-primary" data-product-id="${matchingProduct.id}">
                     Delete
                     </span>
                 </div>
