@@ -8,14 +8,27 @@ import {loadCart} from "../data/cart.js";
 // 'async' returns a 'promise'
 async function loadPage(){
 
-    // 'await' can only run inside 'async' and the closest function has to be 'async'
-    await loadProductsFetch();
+    // try/catch can also work with synchronous (normal) code
+    try {
 
-    const value = await new Promise(resolve => {
-        loadCart(() => {
-            resolve('value1');
+        // // 'throw' purposely creates an error
+        // throw 'error1';
+
+        // 'await' can only run inside 'async' and the closest function has to be 'async'
+        await loadProductsFetch();
+
+        const value = await new Promise((resolve, reject) => {
+            // throw 'error2';
+            loadCart(() => {
+                // // 'reject' creates an error in the future, this is the second way to create errors inside a promise
+                // reject('error3');
+                resolve('value1');
+            });
         });
-    });
+
+    } catch(error) {
+        console.log('Unexpected Error. Please try again later.');
+    }
 
     renderOrderSummary();
     renderPaymentSummary();
