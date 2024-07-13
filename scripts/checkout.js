@@ -5,26 +5,45 @@ import {loadCart} from "../data/cart.js";
 // import '../data/backend-practice.js';
 // import '../data/cart-class.js';
 
-//Loads Multiple promises at the same time
-Promise.all([
-    // new Promise((resolve) => {
-    //     loadProducts(() => {
-    //         resolve();
-    //         // resolve('value1');
-    //     });
-    // }),
-    loadProductsFetch(),
-    new Promise(resolve => {
+// 'async' returns a 'promise'
+async function loadPage(){
+
+    // 'await' can only run inside 'async' and the closest function has to be 'async'
+    await loadProductsFetch();
+
+    const value = await new Promise(resolve => {
         loadCart(() => {
-            resolve();
+            resolve('value1');
         });
-    })
-]).then((values) => {
-    // console.log(values);
+    });
 
     renderOrderSummary();
     renderPaymentSummary();
-});
+    
+}
+
+loadPage();
+
+
+// //Loads Multiple promises at the same time
+// Promise.all([
+//     // new Promise((resolve) => {
+//     //     loadProducts(() => {
+//     //         resolve();
+//     //         // resolve('value1');
+//     //     });
+//     // }),
+//     loadProductsFetch(),
+//     new Promise(resolve => {
+//         loadCart(() => {
+//             resolve();
+//         });
+//     })
+// ]).then((values) => {
+//     // console.log(values);
+//     renderOrderSummary();
+//     renderPaymentSummary();
+// });
 
 // // Using 'Promise'
 // // This is preferred over using 'callback' because this flattens our code
