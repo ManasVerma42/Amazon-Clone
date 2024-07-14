@@ -75,7 +75,11 @@ export function renderPaymentSummary() {
 
 
     document.querySelector('.place-order-button').addEventListener('click', async () => {
-        try { 
+        
+        if(cart.length === 0){
+            alert('Your cart is empty. Please add some items to your cart before placing your order.');
+        } else {
+            try { 
                 const response = await fetch('https://supersimplebackend.dev/orders', {
                 method: 'POST',
                 headers: {
@@ -96,6 +100,7 @@ export function renderPaymentSummary() {
         window.location.href = 'orders.html';
 
         localStorage.removeItem('cart');
+        }
 
     });
 

@@ -3,7 +3,8 @@ import {calculateCartQuantity} from './../data/cart.js';
 
 export function renderAmazonHeader() {
 
-    const cartQuantity = calculateCartQuantity();
+    const cartQuantity = Number(calculateCartQuantity());
+    // console.log(cartQuantity);
     
     const amazonHeaderHTML = `
         <div class="amazon-header-left-section">
