@@ -43,15 +43,15 @@ function saveToStorage(){
 }
 
 export function getCartItem(productId){
-  let matchingProduct;
+  let matchingCartItem;
 
-  cart.forEach(product => {
-    if(product.productId === productId){
-      matchingProduct = product;
+  cart.forEach(cartItem => {
+    if(cartItem.productId === productId){
+      matchingCartItem = cartItem;
     }
   });
 
-  return matchingProduct;
+  return matchingCartItem;
 }
 
 export function addToCart(productId, quantity){

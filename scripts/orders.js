@@ -20,7 +20,7 @@ async function renderOrderPage(){
 	
 		orders.forEach(order => {
 	
-		console.log(order);
+		// console.log(order);
 	
 			let orderProductsHTML = '';
 	
@@ -87,7 +87,7 @@ async function renderOrderPage(){
 			// console.log(orders);
 	
 			document.querySelector('.orders-grid').innerHTML = ordersHTML;
-			// saveToStorage();
+			saveToStorage();
 	}
 
 	document.querySelectorAll('.buy-again-button').forEach(element => {
