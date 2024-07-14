@@ -1,12 +1,13 @@
 import {cart, addToCart, addedToCartConfirmation, calculateCartQuantity} from '../data/cart.js';
 import {products,loadProducts} from '../data/products.js';
+import { renderAmazonHeader } from './amazonHeader.js';
 import {formatCurrency} from './utils/money.js';
 
 loadProducts(renderProductsGrid);
 
 function renderProductsGrid(){
 
-      updateCartQuantity();
+      renderAmazonHeader();
 
       let productsHTML = '';
 

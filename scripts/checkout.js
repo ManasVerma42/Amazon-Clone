@@ -1,7 +1,7 @@
 import {renderOrderSummary} from "./checkout/orderSummary.js";
 import {renderPaymentSummary} from "./checkout/paymentSummary.js";
 import {loadProducts, loadProductsFetch} from '../data/products.js';
-import {loadCart} from "../data/cart.js";
+import {loadCart, loadCartFetch} from "../data/cart.js";
 // import '../data/backend-practice.js';
 // import '../data/cart-class.js';
 
@@ -15,16 +15,19 @@ async function loadPage(){
         // throw 'error1';
 
         // 'await' can only run inside 'async' and the closest function has to be 'async'
-        await loadProductsFetch();
+        await Promise.all([
+            loadProductsFetch(),
+            loadCartFetch()
+        ]);
 
-        const value = await new Promise((resolve, reject) => {
-            // throw 'error2';
-            loadCart(() => {
-                // // 'reject' creates an error in the future, this is the second way to create errors inside a promise
-                // reject('error3');
-                resolve('value1');
-            });
-        });
+        // const value = await new Promise((resolve, reject) => {
+        //     // throw 'error2';
+        //     loadCart(() => {
+        //         // // 'reject' creates an error in the future, this is the second way to create errors inside a promise
+        //         // reject('error3');
+        //         resolve('value1');
+        //     });
+        // });
 
     } catch(error) {
         console.log('Unexpected Error. Please try again later.');

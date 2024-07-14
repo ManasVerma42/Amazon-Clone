@@ -2,7 +2,7 @@ import {cart, calculateCartQuantity} from "../../data/cart.js";
 import {getProduct} from "../../data/products.js";
 import {getDeliveryOption} from "../../data/deliveryOptions.js";
 import {formatCurrency} from "../utils/money.js";
-import {addOrder} from '../../data/orders.js';
+import {addOrder, saveToStorage} from '../../data/orders.js';
 
 export function renderPaymentSummary() {
     
@@ -95,7 +95,8 @@ export function renderPaymentSummary() {
 
         window.location.href = 'orders.html';
 
-    });
+        localStorage.removeItem('cart');
 
+    });
 
 }
