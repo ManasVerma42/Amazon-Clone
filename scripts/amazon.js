@@ -18,7 +18,17 @@ function renderProductsGrid(){
       let filteredProducts = products;
 
       if (searchQuery) {
-        filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
+        filteredProducts = products.filter(product => {
+          // console.log(product);
+          const lowerCaseSearchQuery = searchQuery.toLowerCase();
+          const nameMatches = product.name.toLowerCase().includes(lowerCaseSearchQuery);
+          const keywordMatches = product.keywords.some(keyword => {
+            return keyword.toLowerCase().includes(lowerCaseSearchQuery);
+          });
+
+          return nameMatches || keywordMatches;
+
+        });
       }
 
       filteredProducts.forEach(product => {
