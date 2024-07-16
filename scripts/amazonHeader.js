@@ -39,4 +39,17 @@ export function renderAmazonHeader() {
     `;
     
     document.querySelector('.amazon-header').innerHTML = amazonHeaderHTML;
+
+    document.querySelector('.search-button').addEventListener('click', () => {
+        const searchInput = document.querySelector('.search-bar').value;
+        window.location.href = `amazon.html?search=${searchInput}`;
+    });
+
+    document.querySelector('.search-bar ').addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+            const searchInput = document.querySelector('.search-bar').value;
+            window.location.href = `amazon.html?search=${searchInput}`;
+        }
+    });
+
 }

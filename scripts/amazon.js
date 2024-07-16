@@ -7,11 +7,21 @@ loadProducts(renderProductsGrid);
 
 function renderProductsGrid(){
 
+      const url = new URL(window.location.href);
+      const searchQuery = url.searchParams.get('search');
+      // console.log(searchQuery);
+
       renderAmazonHeader();
 
       let productsHTML = '';
 
-      products.forEach(product => {
+      let filteredProducts = products;
+
+      if (searchQuery) {
+        filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      }
+
+      filteredProducts.forEach(product => {
           productsHTML += `
               <div class="product-container">
                 <div class="product-image-container">
